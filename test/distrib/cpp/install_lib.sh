@@ -37,12 +37,6 @@ cmake -DCMAKE_BUILD_TYPE=Release ../..
 make -j4 install
 cd ../../../../..
 
-# Install protobuf
-mkdir -p "third_party/protobuf/cmake/build"
-cd "third_party/protobuf/cmake/build"
-cmake -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_BUILD_SHARED_LIBS=ON  -DCMAKE_BUILD_TYPE=Release ..
-make -j4 install
-cd ../../../..
 
 # Install zlib
 mkdir -p "third_party/zlib/cmake/build"
@@ -50,6 +44,14 @@ cd "third_party/zlib/cmake/build"
 cmake -DCMAKE_BUILD_TYPE=Release ../..
 make -j4 install
 cd ../../../..
+
+# Install protobuf
+mkdir -p "third_party/protobuf/cmake/build"
+cd "third_party/protobuf/cmake/build"
+cmake -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_BUILD_SHARED_LIBS=ON  -DCMAKE_BUILD_TYPE=Release ..
+make -j4 install
+cd ../../../..
+
 
 # Just before installing gRPC, wipe out contents of all the submodules to simulate
 # a standalone build from an archive
