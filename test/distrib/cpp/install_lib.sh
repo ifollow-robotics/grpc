@@ -35,12 +35,12 @@ mkdir -p "third_party/cares/cares/cmake/build"
 cd "third_party/cares/cares/cmake/build"
 cmake -DCMAKE_BUILD_TYPE=Release ../..
 make -j4 install
-cd ../../../..
+cd ../../../../..
 
 # Install protobuf
 mkdir -p "third_party/protobuf/cmake/build"
 cd "third_party/protobuf/cmake/build"
-cmake -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_BUILD_TYPE=Release ..
+cmake -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_BUILD_SHARED_LIBS=ON  -DCMAKE_BUILD_TYPE=Release ..
 make -j4 install
 cd ../../../..
 
