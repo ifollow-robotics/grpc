@@ -22,43 +22,43 @@ apt-get update && apt-get install -y libssl-dev
 
 # Install absl
 mkdir -p "third_party/abseil-cpp/cmake/build"
-pushd "third_party/abseil-cpp/cmake/build"
+cd "third_party/abseil-cpp/cmake/build"
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE ../..
 make -j4 install
-popd
+cd ../../../..
 
 # Install c-ares
 # If the distribution provides a new-enough version of c-ares,
 # this section can be replaced with:
 # apt-get install -y libc-ares-dev
 mkdir -p "third_party/cares/cares/cmake/build"
-pushd "third_party/cares/cares/cmake/build"
+cd "third_party/cares/cares/cmake/build"
 cmake -DCMAKE_BUILD_TYPE=Release ../..
 make -j4 install
-popd
+cd ../../../..
 
 # Install protobuf
 mkdir -p "third_party/protobuf/cmake/build"
-pushd "third_party/protobuf/cmake/build"
-cmake -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_BUILD_SHARED_LIBS=ON  -DCMAKE_BUILD_TYPE=Release ..
+cd "third_party/protobuf/cmake/build"
+cmake -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_BUILD_TYPE=Release ..
 make -j4 install
-popd
+cd ../../../..
 
 # Install zlib
 mkdir -p "third_party/zlib/cmake/build"
-pushd "third_party/zlib/cmake/build"
+cd "third_party/zlib/cmake/build"
 cmake -DCMAKE_BUILD_TYPE=Release ../..
 make -j4 install
-popd
+cd ../../../..
 
 # Just before installing gRPC, wipe out contents of all the submodules to simulate
 # a standalone build from an archive
 # shellcheck disable=SC2016
-git submodule foreach 'cd $toplevel; rm -rf $name'
+#git submodule foreach 'cd $toplevel; rm -rf $name'
 
 # Install gRPC
 mkdir -p "cmake/build"
-pushd "cmake/build"
+cd "cmake/build"
 cmake \
   -DCMAKE_BUILD_TYPE=Release \
   -DgRPC_INSTALL=ON \
@@ -70,11 +70,11 @@ cmake \
   -DgRPC_ZLIB_PROVIDER=package \
   ../..
 make -j4 install
-popd
+cd ../..
 
 # Build helloworld example using cmake
 mkdir -p "examples/cpp/helloworld/cmake/build"
-pushd "examples/cpp/helloworld/cmake/build"
+cd "examples/cpp/helloworld/cmake/build"
 cmake ../..
 make
-popd
+cd ../..
